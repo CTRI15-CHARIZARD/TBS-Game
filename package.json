@@ -1,0 +1,47 @@
+{
+  "name": "tbs-game",
+  "version": "1.0.0",
+  "description": "The all in one pokemon fan service game that will blow the mind of all users",
+  "main": "server/server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "export NODE_ENV=production && nodemon server/server.ts",
+    "dev": "concurrently \"NODE_ENV=development webpack-dev-server --open\" \"NODE_ENV=development nodemon server/server.ts\"",
+    "build": "NODE_ENV=production webpack --config webpack.config.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CTRI15-CHARIZARD/TBS-Game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CTRI15-CHARIZARD/TBS-Game/issues"
+  },
+  "homepage": "https://github.com/CTRI15-CHARIZARD/TBS-Game#readme",
+  "devDependencies": {
+    "@babel/core": "^7.21.8",
+    "@babel/preset-env": "^7.21.5",
+    "@babel/preset-react": "^7.18.6",
+    "@types/cors": "^2.8.13",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "babel-loader": "^9.1.2",
+    "cors": "^2.8.5",
+    "css-loader": "^6.7.4",
+    "eslint": "^8.41.0",
+    "express": "^4.18.2",
+    "html-webpack-plugin": "^5.5.1",
+    "node": "^20.2.0",
+    "nodemon": "^2.0.22",
+    "react": "^18.2.0",
+    "react-router-dom": "^6.11.2",
+    "sass-loader": "^13.3.0",
+    "style-loader": "^3.3.3",
+    "typescript": "^5.0.4",
+    "webpack": "^5.83.1",
+    "webpack-cli": "^5.1.1",
+    "webpack-dev-server": "^4.15.0"
+  }
+}
