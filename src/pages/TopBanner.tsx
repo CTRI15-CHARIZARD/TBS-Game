@@ -3,7 +3,7 @@ import {Link, Outlet} from 'react-router-dom';
 import Navbar from '../components/Navbar';
 
 
-function TopBanner() {
+const TopBanner: React.FC = () => {
   //STATE DECLARATION (dbSpy3.0)
 
   //END: STATE DECLARATION
@@ -11,9 +11,10 @@ function TopBanner() {
   
   return (
     <>
+    {/* <div className="h-screen"> */}
     <Navbar/>
-    {/* Outlet renders child elements */}
     <Outlet/>
+    {/* </div> */}
     </>
   )
 }
