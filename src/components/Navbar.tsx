@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import pokeballimage from '../../images/pokeballimage.png';
 
 function Navbar() {
 
   return (
     <>
-      <nav className="flex justify-center items-center text-slate-700 text-4xl">
-        <div className="mr-4">
+      <nav className="flex justify-center items-center py-4 text-slate-700 text-4xl border-b-4 border-pokemonYellow rounded bg-gradient-to-b from-pokemonYellowDarker to-pokemonYellow">
+        <div className="mr-8 text-pokemonPurple hover:text-pokemonPurpleLight">
           <NavLink to="/">Home</NavLink>
         </div>
+        <img src={pokeballimage} alt="pokeball" className="max-w-10 max-h-12"></img>
         <div className="flex items-center">
           <div className="mr-4">
             <NavLink
               to="/login"
-              className="text-blue-200 shadow-2xl hover:text-slate-700"
+              className="text-pokemonPurple hover:text-pokemonPurpleLight ml-8"
             >
               Login
             </NavLink>
@@ -21,7 +23,7 @@ function Navbar() {
           {/* Additional elements can be added here */}
         </div>
       </nav>
-      <div className="h-64"></div>
+      {/* <div className="h-8 bg-pokemonBlue"></div> */}
     </>
   );
 }
