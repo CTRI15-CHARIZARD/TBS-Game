@@ -11,7 +11,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<TopBanner />} /> {/* </Route> */}
         <Route index element={<Home />} />
-        <Route path="/login" element={<WebSocket />} />
+        <Route path="/websocket" element={<WebSocket />} />
       </Routes>
     </BrowserRouter>
   );
