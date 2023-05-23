@@ -1,9 +1,11 @@
-const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import path from 'path';
+import HTMLWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 module.exports = {
+
+
+
   entry: './src/index.tsx',
   devtool: 'source-map',
   output: {
@@ -16,7 +18,6 @@ module.exports = {
       title: 'Development',
       template: './index.html'
     }),
-    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
   ],
   resolve: {
@@ -25,39 +26,32 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(ts|js)x?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: [
-              "@babel/preset-env",
-              "@babel/preset-react",
-              "@babel/preset-typescript",
-            ],
-          },
-        },
-      },
-       {
-        test: [/\.s[ac]ss$/i, /\.css$/i],
+        loader: "babel-loader",
+    },
+    {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        loader: "ts-loader",
+    },
+      {
+        test:  /\.css/,
         use: [
-          // Creates `style` nodes from JS strings
-          'style-loader',
-          // Translates CSS into CommonJS
+          MiniCssExtractPlugin.loader,
           'css-loader',
-          // Compiles Sass to CSS
-          'sass-loader',
+          'postcss-loader'
         ],
       }, 
     ],
   },
-  devServer: {
-    static: {
-      directory: path.resolve(__dirname, 'dist'),
-      publicPath: '/dist',
-    },
-    proxy: {
-      '/api': 'http://localhost:3000'
-    }
-  }
+  // devServer: {
+  //   static: {
+  //     directory: path.resolve(__dirname, 'dist'),
+  //     publicPath: '/dist',
+  //   },
+  //   proxy: {
+  //     '/api': 'http://localhost:3000'
+  //   }
+  // }
 }
