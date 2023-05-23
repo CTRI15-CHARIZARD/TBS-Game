@@ -6,10 +6,10 @@ import pokemonList from '../../images/pokemonList.png';
 import pokemonBattle from '../../images/pokemonBattle.png';
 import pokemonHandDrawn from '../../images/handDrawnPokemon.png';
 
-export default function Home() {
+const Home: React.FC = () => {
     const [isClicked, setIsClicked] = useState(false);
 
-    const handleClick = async () => {
+    const handleClick = (): void => {
       setIsClicked(true);
       setTimeout(() => {setIsClicked(false)}, 100);
     };
@@ -37,13 +37,17 @@ export default function Home() {
                             So what are you waiting for?
                         </div>
                         <div className="flex justify-center mt-6 ">
-                            <button className={`flex items-center font-fuzzyBubbles hover:text-white border-8 rounded-md border-pokemonRed bg-pokemonRed max-w-4xl px-6 py-3 text-xl drop-shadow-xl hover:shadow-xl transform transition  ${
+                            <NavLink
+                            to="/battle"
+                            className={`flex items-center font-fuzzyBubbles hover:text-white border-8 rounded-md border-pokemonRed bg-pokemonRed max-w-4xl px-6 py-3 text-xl drop-shadow-xl hover:shadow-xl transform transition  ${
                                 isClicked ? 'translate-y-1' : ''
                                 }`}
-                                onClick={handleClick}
-                            >
+                            onClick={(e) => {
+                                e.preventDefault
+                                handleClick}
+                                }>
                                 Lets Battle!
-                            </button>
+                            </NavLink>
                         </div>
                     </div>
                 </div>
@@ -51,5 +55,6 @@ export default function Home() {
             </div>
         </>
     )
-
 };
+
+export default Home;
