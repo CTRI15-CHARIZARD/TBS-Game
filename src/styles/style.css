@@ -31,3 +31,20 @@
   height: 1rem;
   width: 2rem;
 }
+
+.app-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .top-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+  }
+  
+  .content {
+    padding-top: 100px; /* Adjust this value to match the height of your TopBanner component */
+  }

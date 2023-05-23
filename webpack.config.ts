@@ -50,20 +50,21 @@ module.exports = {
       {
         test:  /\.css/,
         use: [
-          MiniCssExtractPlugin.loader,
+          process.env.NODE_ENV === 'Production' || process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
           'postcss-loader'
         ],
       }, 
     ],
   },
-  // devServer: {
-  //   static: {
-  //     directory: path.resolve(__dirname, 'dist'),
-  //     publicPath: '/dist',
-  //   },
-  //   proxy: {
-  //     '/api': 'http://localhost:3000'
-  //   }
-  // }
+  devServer: {
+    historyApiFallback: true,
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+      publicPath: '/dist',
+    },
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
+  }
 }
