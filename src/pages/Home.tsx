@@ -38,14 +38,14 @@ const Home: React.FC = () => {
                         </div>
                         <div className="flex justify-center mt-6 ">
                             <NavLink
-                            to="/battle"
-                            className={`flex items-center font-fuzzyBubbles hover:text-white border-8 rounded-md border-pokemonRed bg-pokemonRed max-w-4xl px-6 py-3 text-xl drop-shadow-xl hover:shadow-xl transform transition  ${
-                                isClicked ? 'translate-y-1' : ''
-                                }`}
-                            onClick={(e) => {
-                                e.preventDefault
-                                handleClick}
-                                }>
+                                to="/battle"
+                                className={`flex items-center font-fuzzyBubbles hover:text-white border-8 rounded-md border-pokemonRed bg-pokemonRed max-w-4xl px-6 py-3 text-xl drop-shadow-xl hover:shadow-xl transform transition
+                                    ${isClicked ? 'translate-y-1' : ''}`}
+                                onClick={(e) => {
+                                    e.preventDefault;
+                                    handleClick();
+                                }
+                            }>
                                 Lets Battle!
                             </NavLink>
                         </div>
