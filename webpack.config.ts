@@ -1,8 +1,13 @@
-const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
+import path from 'path';
+import HTMLWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 module.exports = {
+
+
+
   entry: './src/index.tsx',
+  devtool: 'source-map',
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
@@ -12,33 +17,30 @@ module.exports = {
     new HTMLWebpackPlugin({
       title: 'Development',
       template: './index.html'
-    })
+    }),
+    new MiniCssExtractPlugin(),
   ],
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+  },
   module: {
     rules: [
       {
-        test: /\.(ts|js)x?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: [
-              "@babel/preset-env",
-              "@babel/preset-react",
-              "@babel/preset-typescript",
-            ],
-          },
-        },
-      },
-       {
-        test: [/\.s[ac]ss$/i, /\.css$/i],
+        loader: "babel-loader",
+    },
+    {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        loader: "ts-loader",
+    },
+      {
+        test:  /\.css/,
         use: [
-          // Creates `style` nodes from JS strings
-          'style-loader',
-          // Translates CSS into CommonJS
+          MiniCssExtractPlugin.loader,
           'css-loader',
-          // Compiles Sass to CSS
-          'sass-loader',
+          'postcss-loader'
         ],
       }, 
     ],
