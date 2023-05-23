@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import welcomePokemon from '../../images/welcomePokemon.png';
@@ -6,11 +6,18 @@ import pokemonList from '../../images/pokemonList.png';
 import pokemonBattle from '../../images/pokemonBattle.png';
 import pokemonHandDrawn from '../../images/handDrawnPokemon.png';
 
-export default function Home() {
+const Home: React.FC = () => {
+    const [isClicked, setIsClicked] = useState(false);
+
+    const handleClick = (): void => {
+      setIsClicked(true);
+      setTimeout(() => {setIsClicked(false)}, 100);
+    };
 
     return (
         <>
-            <div className="flex flex-col items-center h-screen bg-gradient-to-b from-pokemonBlueDarker to-pokemonBlueLighter">
+        <div className="min-h-screen flex flex-col bg-gradient-to-b from-pokemonBlueLighter to-pokemonBlueLighter">
+            <div className="flex flex-col items-center bg-gradient-to-b from-pokemonBlueDarker to-pokemonBlueLighter mb-auto mt-16">
                 <img src={welcomePokemon} alt="Welcome to the Wonderful World of Pokémon!" className="mt-8"/>
                 <div className="flex flex-nowrap justify-evenly mt-10">
                     <div className="w-full pr-20">
@@ -30,14 +37,24 @@ export default function Home() {
                             So what are you waiting for?
                         </div>
                         <div className="flex justify-center mt-6 ">
-                            <button className="flex items-center font-fuzzyBubbles border-8 rounded-md border-pokemonRed bg-pokemonRed max-w-4xl px-6 py-3 text-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-200">
+                            <NavLink
+                                to="/battle"
+                                className={`flex items-center font-fuzzyBubbles hover:text-white border-8 rounded-md border-pokemonRed bg-pokemonRed max-w-4xl px-6 py-3 text-xl drop-shadow-xl hover:shadow-xl transform transition
+                                    ${isClicked ? 'translate-y-1' : ''}`}
+                                onClick={(e) => {
+                                    e.preventDefault;
+                                    handleClick();
+                                }
+                            }>
                                 Lets Battle!
-                            </button>
+                            </NavLink>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
         </>
     )
-
 };
+
+export default Home;
