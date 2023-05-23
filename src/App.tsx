@@ -6,11 +6,16 @@ import Home from "./pages/Home";
 
 const App: React.FC = () => {
 
+
     return (
+      
         <BrowserRouter>
+        <TopBanner />
           <Routes>
-            <Route path='/' element={<TopBanner />}>
-            <Route index element={<Home />} />
+            
+            <Route path='/' element={<Home />}>
+            {/* <Route index element={<Home />} /> */}
+            <Route path='login' element={<Home />}/>
 
             </Route>
           </Routes>
