@@ -1,8 +1,11 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: './src/index.tsx',
+  devtool: 'source-map',
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
@@ -12,8 +15,13 @@ module.exports = {
     new HTMLWebpackPlugin({
       title: 'Development',
       template: './index.html'
-    })
+    }),
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin(),
   ],
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+  },
   module: {
     rules: [
       {
@@ -43,13 +51,13 @@ module.exports = {
       }, 
     ],
   },
-  // devServer: {
-  //   static: {
-  //     directory: path.resolve(__dirname, 'dist'),
-  //     publicPath: '/dist',
-  //   },
-  //   proxy: {
-  //     '/api': 'http://localhost:3000'
-  //   }
-  // }
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+      publicPath: '/dist',
+    },
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
+  }
 }
