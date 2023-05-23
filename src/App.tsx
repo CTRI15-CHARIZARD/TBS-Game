@@ -1,17 +1,20 @@
-import React from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
-import "./styles/index.css"
+import React from 'react';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import './styles/style.css';
+import TopBanner from './pages/TopBanner';
+import Home from './pages/Home';
+import WebSocket from './pages/Websocket';
 
 const App: React.FC = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<TopBanner />} /> {/* </Route> */}
+        <Route index element={<Home />} />
+        <Route path="/login" element={<WebSocket />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
-    return (
-        <BrowserRouter>
-          <Routes>
-
-
-          </Routes>
-        </BrowserRouter>
-      );
-
-}
 export default App;
