@@ -72,8 +72,8 @@
 
   #health-1::-webkit-progress-value,
   #health-2::-webkit-progress-value {
-    background-color: #1f7af1;
-    border: 1px solid #1f7af1;
+    background-color: #07e500;
+    border: 1px solid #07e500;
     border-radius: 10px;
   }
 
