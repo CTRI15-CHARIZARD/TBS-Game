@@ -1,22 +1,22 @@
-import { createContext, useContext, useState } from 'react';
+// import { createContext, useContext, useState } from 'react';
 
-const StoreContext = createContext('');
+// const StoreContext = createContext('');
 
-export function StoreProvider({ children }) {
-  const [userData, setUserData] = useState(null);
+// export function StoreProvider({ children }) {
+//   const [userData, setUserData] = useState(null);
 
-  const setUser = (user) => {
-    setUserData(user);
-  };
+//   const setUser = (user) => {
+//     setUserData(user);
+//   };
 
-  const store = {
-    userData,
-    setUser,
-  };
+//   const store = {
+//     userData,
+//     setUser,
+//   };
 
-  return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;
-}
+//   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;
+// }
 
-export function useStore() {
-  return useContext(StoreContext);
-}
+// export function useStore() {
+//   return useContext(StoreContext);
+// }
