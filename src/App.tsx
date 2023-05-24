@@ -1,22 +1,32 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './styles/style.css';
-import TopBanner from './pages/TopBanner';
-import Home from './pages/Home';
-import WebSocketPage from './pages/WebSocketPage';
+import "./styles/style.css";
+import React, {useState} from "react";
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import TopBanner from "./pages/TopBanner";
+import Home from "./pages/Home";
+import Battle from "./pages/Battle";
+import PokemonSelector from "./pages/PokemonSelector";
+import { PokemonContext } from "./store/pokemonContext";
 
-const App: React.FC = () => {
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<TopBanner />}>
+      <Route index element={<Home />} />
+      <Route path='/select' element={<PokemonSelector />}/>
+      <Route path='/battle' element={<Battle />}/>
+    </Route>
+  )
+);
+
+const App = () => {
+  const [pokemon, setPokemon] = useState('');
+  const pokemonInfo = { pokemon, setPokemon}
+
   return (
-    <BrowserRouter>
-      <TopBanner />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Home />} />
-        <Route path="/battle" element={<Home />} />
-        <Route path="/websocket" element={<WebSocketPage />} />
-      </Routes>
-    </BrowserRouter>
-  );
+      <PokemonContext.Provider value={pokemonInfo}>
+        <RouterProvider router={router} />
+      </PokemonContext.Provider>
+    )
 };
 
 export default App;

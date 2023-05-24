@@ -1,8 +1,11 @@
 import path from 'path';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import webpack, { Configuration } from 'webpack';
 
-module.exports = {
+const isProduction = process.env.NODE_ENV === 'production';
+
+const config: Configuration & { devServer?: any } = {
   entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -35,14 +38,18 @@ module.exports = {
       },
       {
         test: /\.css/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        use: [
+          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+          'postcss-loader',
+        ],
       },
     ],
   },
   devServer: {
     historyApiFallback: true,
     proxy: {
-      '/api': 'localhost:3000',
+      '/api': 'http://localhost:3000',
     },
   },
   plugins: [
@@ -51,10 +58,18 @@ module.exports = {
       template: './index.html',
     }),
     new MiniCssExtractPlugin(),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        // Any loader-specific options can be added here
+      },
+    }),
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   devtool: 'source-map',
-  mode: process.env.NODE_ENV,
+  mode: isProduction ? 'production' : 'development',
+  stats: 'minimal',
 };
+
+export default config;

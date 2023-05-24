@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
 import welcomePokemon from '../../images/welcomePokemon.png';
 import pokemonList from '../../images/pokemonList.png';
 import pokemonBattle from '../../images/pokemonBattle.png';
-import pokemonHandDrawn from '../../images/handDrawnPokemon.png';
+// import pokemonHandDrawn from '../../images/handDrawnPokemon.png';
 
 const Home: React.FC = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -45,7 +44,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <div className="flex min-h-screen flex-col bg-gradient-to-b from-pokemonBlueLighter to-pokemonBlueLighter">
+      <div className="flex min-h-screen flex-col bg-gradient-to-b from-pokemonBlueDarker via-pokemonBlueLighter to-pokemonBlueLighter">
         <div className="mb-auto mt-16 flex flex-col items-center bg-gradient-to-b from-pokemonBlueDarker to-pokemonBlueLighter">
           <img src={welcomePokemon} alt="Welcome to the Wonderful World of Pokémon!" className="mt-8" />
           <div className="mt-10 flex flex-nowrap justify-evenly">
@@ -71,13 +70,10 @@ const Home: React.FC = () => {
               </div>
               <div className="mt-6 flex justify-center ">
                 <NavLink
-                  to="/battle"
+                  to="/select"
                   className={`flex max-w-4xl transform items-center rounded-md border-8 border-pokemonRed bg-pokemonRed px-6 py-3 font-fuzzyBubbles text-xl drop-shadow-xl transition hover:text-white hover:shadow-xl
-                  ${isClicked ? 'translate-y-1' : ''}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleClick();
-                  }}
+                                    ${isClicked ? 'translate-y-1' : ''}`}
+                  onClick={handleClick}
                 >
                   Lets Battle!
                 </NavLink>
