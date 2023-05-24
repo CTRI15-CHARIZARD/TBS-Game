@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { PokemonContext } from '../store/pokemonContext';
 import Bulbasaur from '../../images/bulbasaur.png';
 import Charmander from '../../images/charmander.png';
 import Squirtle from '../../images/squirtle.png';
@@ -8,37 +9,26 @@ import Jigglypuff from '../../images/jigglypuff.png';
 
 
 
+
 const SelectPokemon: React.FC = () => {
-
-    // const pokemonChoices: string[] = ['Bulbasaur', 'Charmander', 'Squritle', 'Pikachu', 'Jigglypuff']
-    // const choices = document.querySelector('#pokemonChoices')
-
-    // for (const el of pokemonChoices) {
-    //     <div className="flex flex-col justify-center">{el}</div>
-    // }
-    const [pokemon, setPokemon] = useState('');
+    const { pokemon, setPokemon } = useContext(PokemonContext)
     const navigate = useNavigate()
 
-    const handleClick = async () => {
-        //setPokemon()
-        await Promise.resolve(console.log('pokemon in the handleClick: ', pokemon))
+    const handleClick = (value: string): void => {
+        setPokemon(value);
+        console.log('pokemon: ', pokemon, 'value: ', value)
         navigate('/battle');
-        setPokemon('');
       };
-
-      useEffect(() => {
-        console.log('pokemon choice:', pokemon);
-      }, [pokemon]);
 
     return (
         <>
-        <div className="min-h-screen bg-gradient-to-b from-pokemonBlueDarker via-pokemonBlueLighter to-pokemonBlueLighter">
-        <br></br>
-        <br></br>
-        <div className="flex justify-center mt-10 text-4xl text-white font-fuzzyBubbles mt-24">
-                            Select your Pokemon!
-                        </div>
-            <div id="pokemonChoices" className='flex flex-row justify-around items-center pt-24 pb-24'>
+            <div className="min-h-screen bg-gradient-to-b from-pokemonBlueDarker via-pokemonBlueLighter to-pokemonBlueLighter">
+                <br></br>
+                <br></br>
+                <div className="flex justify-center mt-10 text-4xl text-white font-fuzzyBubbles mt-24">
+                    Select your Pokemon!
+                </div>
+                <div id="pokemonChoices" className='flex flex-row justify-around items-center pt-24 pb-24'>
                     <div className="flex flex-col justify-center">
                         <div>
                             <img src={Bulbasaur} alt="Bulbasaur picture" className="max-w-xs rounded-full" />
@@ -56,11 +46,9 @@ const SelectPokemon: React.FC = () => {
                         <br></br>
                         <button 
                             className="flex items-center justify-center font-fuzzyBubbles hover:text-white border-4 rounded-md border-pokemonRed bg-pokemonRed w-28 mx-auto text-xl drop-shadow-xl hover:shadow-xl transform transition"
-                            onClick={ async () => {
-                                await Promise.resolve(setPokemon('bulbasaur'));
-                                console.log('What is up?')
-
-                                handleClick();
+                            value='Bulbasaur'
+                            onClick={(event) => {
+                                handleClick(event.currentTarget.value);
                                 }
                             }
                         >
@@ -69,7 +57,7 @@ const SelectPokemon: React.FC = () => {
                     </div>
                     <div className="flex flex-col justify-center">
                         <div>
-                        <img src={Charmander} alt="Charmander picture" className="max-w-xs rounded-full" />
+                            <img src={Charmander} alt="Charmander picture" className="max-w-xs rounded-full" />
                         </div>
                         <br></br>
                         <div className="flex justify-center text-3xl font-fuzzyBubbles">
@@ -82,19 +70,18 @@ const SelectPokemon: React.FC = () => {
                         <br></br>
                         <button 
                             className="flex items-center justify-center font-fuzzyBubbles hover:text-white border-4 rounded-md border-pokemonRed bg-pokemonRed w-28 mx-auto text-xl drop-shadow-xl hover:shadow-xl transform transition"
-                            value="charmander"
-                            onClick={() => {
-                                setPokemon('charmander')
-                                handleClick();
+                            value="Charmander"
+                            onClick={(event) => {
+                                handleClick(event.currentTarget.value);
                                 }
-                            }    
+                            }
                         >
                             Select
                         </button>
                     </div>
                     <div className="flex flex-col justify-center">
                         <div>
-                        <img src={Squirtle} alt="Squirtle picture" className="max-w-xs rounded-full" />
+                            <img src={Squirtle} alt="Squirtle picture" className="max-w-xs rounded-full" />
                         </div>
                         <br></br>
                         <div className="flex justify-center text-3xl font-fuzzyBubbles">
@@ -107,9 +94,9 @@ const SelectPokemon: React.FC = () => {
                         <br></br>
                         <button 
                             className="flex items-center justify-center font-fuzzyBubbles hover:text-white border-4 rounded-md border-pokemonRed bg-pokemonRed w-28 mx-auto text-xl drop-shadow-xl hover:shadow-xl transform transition"
-                            onClick={() => {
-                                setPokemon('squirtle');
-                                handleClick();
+                            value='Squirtle'
+                            onClick={(event) => {
+                                handleClick(event.currentTarget.value);
                                 }
                             }
                         >
@@ -118,7 +105,7 @@ const SelectPokemon: React.FC = () => {
                     </div>
                     <div className="flex flex-col justify-center">
                         <div>
-                        <img src={Pikachu} alt="Pikachu picture" className="max-w-xs rounded-full" />
+                            <img src={Pikachu} alt="Pikachu picture" className="max-w-xs rounded-full" />
                         </div>
                         <br></br>
                         <div className="flex justify-center text-3xl font-fuzzyBubbles">
@@ -131,9 +118,9 @@ const SelectPokemon: React.FC = () => {
                         <br></br>
                         <button 
                             className="flex items-center justify-center font-fuzzyBubbles hover:text-white border-4 rounded-md border-pokemonRed bg-pokemonRed w-28 mx-auto text-xl drop-shadow-xl hover:shadow-xl transform transition"
-                            onClick={() => {
-                                setPokemon('pikachu');
-                                handleClick();
+                            value='Pikachu'
+                            onClick={(event) => {
+                                handleClick(event.currentTarget.value);
                                 }
                             }
                         >
@@ -142,7 +129,7 @@ const SelectPokemon: React.FC = () => {
                     </div>
                     <div className="flex flex-col justify-center">
                         <div>
-                        <img src={Jigglypuff} alt="Jigglypuff picture" className="max-w-xs rounded-full" />
+                            <img src={Jigglypuff} alt="Jigglypuff picture" className="max-w-xs rounded-full" />
                         </div>
                         <br></br>
                         <div className="flex justify-center text-3xl font-fuzzyBubbles">
@@ -155,18 +142,17 @@ const SelectPokemon: React.FC = () => {
                         <br></br>
                         <button 
                             className="flex items-center justify-center font-fuzzyBubbles hover:text-white border-4 rounded-md border-pokemonRed bg-pokemonRed w-28 mx-auto text-xl drop-shadow-xl hover:shadow-xl transform transition"
-                            onClick={() => {
-                                setPokemon('jigglypuff');
-                                handleClick();
+                            value='Jigglypuff'
+                            onClick={(event) => {
+                                handleClick(event.currentTarget.value);
                                 }
                             }
                         >
                             Select
                         </button>
                     </div>
+                </div>
             </div>
-        </div>
-
         </>
     )
 };

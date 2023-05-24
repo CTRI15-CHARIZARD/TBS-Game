@@ -1,31 +1,32 @@
-import React from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
-import "./styles/style.css"
-import TopBanner from "./pages/TopBanner"
+import "./styles/style.css";
+import React, {useState} from "react";
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import TopBanner from "./pages/TopBanner";
 import Home from "./pages/Home";
 import Battle from "./pages/Battle";
 import PokemonSelector from "./pages/PokemonSelector";
+import { PokemonContext } from "./store/pokemonContext";
 
-const App: React.FC = () => {
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<TopBanner />}>
+      <Route index element={<Home />} />
+      <Route path='/select' element={<PokemonSelector />}/>
+      <Route path='/battle' element={<Battle />}/>
+    </Route>
+  )
+);
 
-    return (
-      
-        <BrowserRouter>
-        <div className="app-container">
-        <TopBanner />
-          <Routes>
-            {/* <Route path='/login' element={<Home />}/> */}
-            <Route path='/select' element={<PokemonSelector />}/>
-            <Route path='/battle' element={<Battle />}/>
-            <Route path='/' element={<Home />}>
-            </Route>
-          </Routes>
-        </div>
-        </BrowserRouter>
+const App = () => {
+  const [pokemon, setPokemon] = useState('');
+  const pokemonInfo = { pokemon, setPokemon}
 
-      );
-
+  return (
+      <PokemonContext.Provider value={pokemonInfo}>
+        <RouterProvider router={router} />
+      </PokemonContext.Provider>
+    )
 };
 
 export default App;
