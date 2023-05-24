@@ -23,6 +23,7 @@ const App: React.FC = () => {
           </Routes>
         </div>
         </BrowserRouter>
+
       );
 
 };

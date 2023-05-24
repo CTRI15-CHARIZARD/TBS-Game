@@ -23,9 +23,10 @@
   width: 32rem;
   background-color: rgb(208,224,208);
 }
-  .full-height {
-    height: 100vh;
-  }
+
+.full-height {
+  height: 100vh;
+}
 
 #action-btn {
   height: 1rem;
