@@ -3,9 +3,6 @@ import HTMLWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 module.exports = {
-
-
-
   entry: './src/index.tsx',
   devtool: 'source-map',
   output: {

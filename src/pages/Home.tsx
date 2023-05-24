@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
 import welcomePokemon from '../../images/welcomePokemon.png';
 import pokemonList from '../../images/pokemonList.png';
 import pokemonBattle from '../../images/pokemonBattle.png';
-import pokemonHandDrawn from '../../images/handDrawnPokemon.png';
+// import pokemonHandDrawn from '../../images/handDrawnPokemon.png';
 
 const Home: React.FC = () => {
     const [isClicked, setIsClicked] = useState(false);
@@ -38,7 +37,7 @@ const Home: React.FC = () => {
                         </div>
                         <div className="flex justify-center mt-6 ">
                             <NavLink
-                                to="/battle"
+                                to="/select"
                                 className={`flex items-center font-fuzzyBubbles hover:text-white border-8 rounded-md border-pokemonRed bg-pokemonRed max-w-4xl px-6 py-3 text-xl drop-shadow-xl hover:shadow-xl transform transition
                                     ${isClicked ? 'translate-y-1' : ''}`}
                                 onClick={handleClick}

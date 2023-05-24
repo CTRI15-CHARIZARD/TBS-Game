@@ -4,6 +4,7 @@ import "./styles/style.css"
 import TopBanner from "./pages/TopBanner"
 import Home from "./pages/Home";
 import Battle from "./pages/Battle";
+import PokemonSelector from "./pages/PokemonSelector";
 
 const App: React.FC = () => {
 
@@ -15,11 +16,12 @@ const App: React.FC = () => {
         <TopBanner />
           <Routes>
             {/* <Route path='/login' element={<Home />}/> */}
+            <Route path='/select' element={<PokemonSelector />}/>
             <Route path='/battle' element={<Battle />}/>
             <Route path='/' element={<Home />}>
             </Route>
           </Routes>
-      </div>
+        </div>
         </BrowserRouter>
       );
 
