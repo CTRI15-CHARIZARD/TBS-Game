@@ -1,30 +1,54 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { PokemonContext } from '../store/pokemonContext'
 
 export default function Battle() {
+    const { pokemon, setPokemon } = useContext(PokemonContext)
+    const navigate = useNavigate()
 
-    function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+    async function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
         let btn: EventTarget = e.target;
         let text: string = (btn as HTMLElement).textContent!
 
         let battleInfo: HTMLElement = document.getElementById('battle-info')!
+        console.log('pokemon: ', pokemon)
 
         switch(text) {
             case 'Attack 1': 
-                battleInfo.innerHTML = `${text} was used`
+                battleInfo.innerHTML = `${text} was used${ pokemon ? ' by ' + pokemon + '!' : '!'}`
                 // console.log(`${text} was used`);
                 break;
             case 'Attack 2':
-                battleInfo.innerHTML = `${text} was used`
+                battleInfo.innerHTML = `${text} was used${ pokemon ? ' by ' + pokemon + '!' : '!'}`
                 // console.log(`${text} was used`);
                 break;
             case 'Attack 3':
-                battleInfo.innerHTML = `${text} was used`
+                battleInfo.innerHTML = `${text} was used${ pokemon ? ' by ' + pokemon + '!' : '!'}`
+                console.log('pokemon: ', pokemon)
                 // console.log(`${text} was used`);
                 break;
             case 'Run': 
                 const randomNum = Math.floor(Math.random() * 10)
-                if (randomNum <= 3) battleInfo.innerHTML = 'You failed to escape!'
-                else if (randomNum > 3) battleInfo.innerHTML = 'You have successfully escaped!'
+                        battleInfo.innerHTML = 'Attempting to escape...'
+                if (randomNum <= 3) {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'You failed to escape!'
+                    }, 2000))
+                    setTimeout(() => {
+                        battleInfo.innerHTML = '';
+                    }, 6000)
+                } else if (randomNum > 3) {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'You have successfully escaped!';
+                    }, 2000))
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = '';
+                    }, 4000))
+                    setPokemon('');
+                    setTimeout(() => {
+                            navigate('/select')
+                        }, 4000);
+                }
                 // console.log('You have successfully escaped')
                 break;
             default: 
@@ -51,10 +75,22 @@ export default function Battle() {
                         <progress id='health-2' value='100' max='100' className='justify-self-start self-end mb-6'></progress>
                     </div>
                     <div id='action-bar' className='grid gap-3 grid-cols-2 grid-rows-2 my-4 mx-auto border-2 border-black rounded-lg'>
-                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" onClick={handleClick}>Attack 1</button>
-                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" onClick={handleClick}>Attack 2</button>
-                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" onClick={handleClick}>Attack 3</button>
-                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonBlue/75 hover:bg-pokemonBlue cursor-pointer drop-shadow-xl hover:shadow-xl" onClick={progressTest}>Run</button>
+                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" 
+                            onClick={handleClick}>
+                            Attack 1
+                        </button>
+                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" 
+                            onClick={handleClick}>
+                            Attack 2
+                        </button>
+                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" 
+                            onClick={handleClick}>
+                            Attack 3
+                        </button>
+                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonBlue/75 hover:bg-pokemonBlue cursor-pointer drop-shadow-xl hover:shadow-xl" 
+                            onClick={handleClick}>
+                            Run
+                        </button>
                     </div>
                 </div>
             </div>
