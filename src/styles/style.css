@@ -29,12 +29,29 @@
 }
 
 #action-btn {
-  height: 2rem;
-  width: 5rem;
+  height: 1rem;
+  width: 2rem;
 }
 
 #battle-info {
-  height: 3rem;
-  width: 50%;
-  background-color: rgb(208,224,208, 0.77)
-}
+    height: 3rem;
+    width: 50%;
+    background-color: rgb(208,224,208, 0.77)
+  }
+
+.app-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .top-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+  }
+  
+  .content {
+    padding-top: 100px; /* Adjust this value to match the height of your TopBanner component */
+  }
