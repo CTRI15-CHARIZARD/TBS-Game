@@ -2,8 +2,8 @@ import { response } from 'express';
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { PokemonContext } from '../store/pokemonContext';
-import bulbasaurBack from '../../images/bulbasaurBack.png';
 import bulbasaurFront from '../../images/bulbasaurFront.png';
+import bulbasaurBack from '../../images/bulbasaurBack.png';
 import squirtleFront from '../../images/squirtleFront.png';
 import squirtleBack from '../../images/squirtleBack.png';
 import pikachuFront from '../../images/pikachuFront.png';
