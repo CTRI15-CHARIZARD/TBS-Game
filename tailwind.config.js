@@ -18,6 +18,14 @@ module.exports = {
       pokemonYellowDark: '#fac725',
       pokemonYellowDarker: '#f4a70c',
       pokemonYellowLight: '#fcea8b',
+      fire: '#ee8130',
+      normal: '#a8a77a',
+      water: '#6390f0',
+      electric: '#f7d02c',
+      grass: '#7ac74c',
+      poison: '#a33ea1',
+      fairy: '#d685ad',
+      fairyLight: '#f2d8e6'
     },
     extend: {
       fontFamily: {
