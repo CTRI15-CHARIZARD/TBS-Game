@@ -35,7 +35,7 @@
 
 #battle-info {
     height: 3rem;
-    width: 50%;
+    width: 35%;
     background-color: rgb(208,224,208, 0.77)
   }
 
@@ -54,4 +54,29 @@
   
   .content {
     padding-top: 100px; /* Adjust this value to match the height of your TopBanner component */
+  }
+
+  #health-1,
+  #health-2 {
+    height: 1.5rem;
+    width: 14rem;
+    color: blue;
+  }
+
+  #health-1::-webkit-progress-bar,
+  #health-2::-webkit-progress-bar {
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: rgb(208,224,208, 0.77);
+  }
+
+  #health-1::-webkit-progress-value,
+  #health-2::-webkit-progress-value {
+    background-color: #1f7af1;
+    border: 1px solid #1f7af1;
+    border-radius: 10px;
+  }
+
+  #health-2 {
+    transform: rotate(180deg);
   }
