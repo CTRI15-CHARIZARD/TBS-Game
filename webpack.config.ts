@@ -57,13 +57,14 @@ module.exports = {
       }, 
     ],
   },
-  // devServer: {
-  //   static: {
-  //     directory: path.resolve(__dirname, 'dist'),
-  //     publicPath: '/dist',
-  //   },
-  //   proxy: {
-  //     '/api': 'http://localhost:3000'
-  //   }
-  // }
+  devServer: {
+    historyApiFallback: true,
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+      publicPath: '/dist',
+    },
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
+  }
 }

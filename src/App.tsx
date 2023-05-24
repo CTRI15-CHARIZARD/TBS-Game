@@ -3,6 +3,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import "./styles/style.css"
 import TopBanner from "./pages/TopBanner"
 import Home from "./pages/Home";
+import Battle from './pages/Battle';
 
 const App: React.FC = () => {
 
@@ -12,15 +13,14 @@ const App: React.FC = () => {
         <BrowserRouter>
         <TopBanner />
           <Routes>
-            
-            <Route path='/' element={<Home />}>
             {/* <Route index element={<Home />} /> */}
             <Route path='/login' element={<Home />}/>
-            <Route path='/battle' element={<Home />}/>
-
+            <Route path='/battle' element={<Battle />}/>
+            <Route path='/' element={<Home />}>
             </Route>
           </Routes>
         </BrowserRouter>
+
       );
 
 };
