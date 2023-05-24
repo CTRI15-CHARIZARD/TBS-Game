@@ -11,7 +11,7 @@ const Home: React.FC = () => {
   const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
-    const socket = io('http://localhost:8080'); // Replace with your server URL
+    const socket = io('http://localhost:3000'); // Replace with your server URL
 
     socket.on('connect', () => {
       console.log('Connected to WebSocket server');
@@ -22,7 +22,7 @@ const Home: React.FC = () => {
     });
 
     socket.on('roomId', (roomId: any) => {
-      console.log('Received roomId:', roomId);
+      console.log('In socket.on, received roomId:', roomId);
       // Update your UI with the received roomId
     });
 
@@ -72,9 +72,9 @@ const Home: React.FC = () => {
                 <NavLink
                   to="/battle"
                   className={`flex max-w-4xl transform items-center rounded-md border-8 border-pokemonRed bg-pokemonRed px-6 py-3 font-fuzzyBubbles text-xl drop-shadow-xl transition hover:text-white hover:shadow-xl
-                                    ${isClicked ? 'translate-y-1' : ''}`}
+                  ${isClicked ? 'translate-y-1' : ''}`}
                   onClick={(e) => {
-                    e.preventDefault;
+                    e.preventDefault();
                     handleClick();
                   }}
                 >
