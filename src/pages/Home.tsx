@@ -9,6 +9,7 @@ import pokemonHandDrawn from '../../images/handDrawnPokemon.png';
 
 const Home: React.FC = () => {
   const [isClicked, setIsClicked] = useState(false);
+  const [compRoomId, setCompRoomId] = useState('PLACEHOLDER'); // Use state for compRoomId
 
   useEffect(() => {
     const socket = io('http://localhost:3000'); // Replace with your server URL
@@ -22,12 +23,12 @@ const Home: React.FC = () => {
     });
 
     socket.on('roomId', (roomId: any) => {
-      console.log('In socket.on, received roomId:', roomId);
-      // Update your UI with the received roomId
+      console.log('received roomId:', roomId);
+      setCompRoomId(roomId); // Update compRoomId with state setter function
     });
 
     // Emit the roomId to the server
-    const roomId = 'Your Room ID'; // Replace with the actual roomId
+    const roomId = socket.id; // Replace with the actual roomId
     socket.emit('roomId', roomId);
 
     return () => {
@@ -66,7 +67,7 @@ const Home: React.FC = () => {
                 <div className="absolute inset-0 rounded-lg border-2 border-pokemonPurple"></div>
               </div>
               <div className="mt-10 flex justify-center font-fuzzyBubbles text-2xl text-pokemonPurple">
-                So what are you waiting for?
+                So what are you waiting for? {compRoomId === 'PLACEHOLDER' ? '' : compRoomId}
               </div>
               <div className="mt-6 flex justify-center ">
                 <NavLink
