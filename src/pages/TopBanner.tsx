@@ -11,7 +11,7 @@ const TopBanner: React.FC = () => {
   
   return (
     <>
-    {/* <div className="h-screen"> */}
+    {/* <div className="bg-pokemonBlueDark"> */}
     <Navbar/>
     <Outlet/>
     {/* </div> */}

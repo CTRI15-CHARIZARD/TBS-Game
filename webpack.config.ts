@@ -3,9 +3,6 @@ import HTMLWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 module.exports = {
-
-
-
   entry: './src/index.tsx',
   devtool: 'source-map',
   output: {
@@ -50,7 +47,7 @@ module.exports = {
       {
         test:  /\.css/,
         use: [
-          MiniCssExtractPlugin.loader,
+          process.env.NODE_ENV === 'Production' || process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
           'postcss-loader'
         ],

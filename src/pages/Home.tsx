@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
 import welcomePokemon from '../../images/welcomePokemon.png';
 import pokemonList from '../../images/pokemonList.png';
 import pokemonBattle from '../../images/pokemonBattle.png';
-import pokemonHandDrawn from '../../images/handDrawnPokemon.png';
+// import pokemonHandDrawn from '../../images/handDrawnPokemon.png';
 
 const Home: React.FC = () => {
     const [isClicked, setIsClicked] = useState(false);
@@ -16,7 +15,7 @@ const Home: React.FC = () => {
 
     return (
         <>
-        <div className="min-h-screen flex flex-col bg-gradient-to-b from-pokemonBlueLighter to-pokemonBlueLighter">
+        <div className="min-h-screen flex flex-col bg-gradient-to-b from-pokemonBlueDarker via-pokemonBlueLighter to-pokemonBlueLighter">
             <div className="flex flex-col items-center bg-gradient-to-b from-pokemonBlueDarker to-pokemonBlueLighter mb-auto mt-16">
                 <img src={welcomePokemon} alt="Welcome to the Wonderful World of Pokémon!" className="mt-8"/>
                 <div className="flex flex-nowrap justify-evenly mt-10">
@@ -38,14 +37,11 @@ const Home: React.FC = () => {
                         </div>
                         <div className="flex justify-center mt-6 ">
                             <NavLink
-                                to="/battle"
+                                to="/select"
                                 className={`flex items-center font-fuzzyBubbles hover:text-white border-8 rounded-md border-pokemonRed bg-pokemonRed max-w-4xl px-6 py-3 text-xl drop-shadow-xl hover:shadow-xl transform transition
                                     ${isClicked ? 'translate-y-1' : ''}`}
-                                onClick={(e) => {
-                                    e.preventDefault;
-                                    handleClick();
-                                }
-                            }>
+                                onClick={handleClick}
+                            >
                                 Lets Battle!
                             </NavLink>
                         </div>
