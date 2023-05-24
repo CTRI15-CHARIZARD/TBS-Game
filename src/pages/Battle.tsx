@@ -1,15 +1,25 @@
 import { response } from 'express';
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { PokemonContext } from '../store/pokemonContext'
-import bulbasaurBack from '../../image/bulbasaurBack.png'
-import bulbasaurFront from '../../image/bulbasaurFront.png'
-import charmanderBack from '../../image/charmanderBack.png'
-import charmanderFront from '../../image/charmanderFront.png'
+import { PokemonContext } from '../store/pokemonContext';
+import bulbasaurBack from '../../images/bulbasaurBack.png';
+import bulbasaurFront from '../../images/bulbasaurFront.png';
+import squirtleFront from '../../images/squirtleFront.png';
+import squirtleBack from '../../images/squirtleBack.png';
+import pikachuFront from '../../images/pikachuFront.png';
+import pikachuBack from '../../images/pikachuBack.png';
+import jigglypuffFront from '../../images/jigglypuffFront.png';
+import jigglypuffBack from '../../images/jigglypuffBack.png';
+import charmanderFront from '../../images/charmanderFront.png';
+import charmanderBack from '../../images/charmanderBack.png';
+
 
 export default function Battle() {
     const { pokemon, setPokemon } = useContext(PokemonContext)
     const navigate = useNavigate()
+    const options = [bulbasaurFront, squirtleFront, pikachuFront, jigglypuffFront, charmanderFront];
+    const randomIndex = Math.floor(Math.random() * options.length);
+    const randomOption = options[randomIndex];
 
     async function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
         let btn: EventTarget = e.target;
@@ -49,8 +59,8 @@ export default function Battle() {
                     await Promise.resolve(setTimeout(() => {
                         battleInfo.innerHTML = '';
                     }, 4000))
-                    setPokemon('');
                     setTimeout(() => {
+                        setPokemon('');
                             navigate('/select')
                         }, 4000);
                 }
@@ -86,8 +96,13 @@ export default function Battle() {
                     <div id='battle-screen' className='flex justify-evenly content-center border-4 border-black rounded-lg m-auto drop-shadow-xl'>
                         <div className="flex flex-col items-end justify-end jusitfy-self-end h-full">
                             <div className="flex flex-col justify-end mb-6">
-                                <div className="flex items-center justify-center mb-8">
-                                    This is Pokemon image 1
+                                <div className="flex items-center justify-center mb-10">
+                                <img src={pokemon === 'Charmander' ? charmanderBack :
+                                    pokemon === 'Bulbasaur' ? bulbasaurBack :
+                                    pokemon === 'Squirtle' ? squirtleBack :
+                                    pokemon === 'Pikachu' ? pikachuBack : jigglypuffBack
+                            } alt="Charmander!" 
+                                style={{ transform: 'scale(3)' }}/>
                                 </div>
                                 <progress
                                     id="health-1"
@@ -108,11 +123,12 @@ export default function Battle() {
                                     id="health-2"
                                     value="100"
                                     max="100"
-                                    className="self-center mb-2"
+                                    className="self-center"
                                     style={{ width: '200px', height: '10px', backgroundColor: 'green' }}
                                 ></progress>
                                 <div className="flex items-center justify-center mt-24">
-                                    This is Pokemon image 2
+                                    <img src={randomOption} alt="Bulbasaur!"
+                                    style={{ transform: 'scale(3)' }}/>
                                 </div>
                             </div>
                         </div>
