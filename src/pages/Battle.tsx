@@ -1,24 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { PokemonContext } from '../store/pokemonContext'
 
 export default function Battle() {
+    const { pokemon, setPokemon } = useContext(PokemonContext)
 
     function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
         let btn: EventTarget = e.target;
         let text: string = (btn as HTMLElement).textContent!
 
         let battleInfo: HTMLElement = document.getElementById('battle-info')!
+        console.log('pokemon: ', pokemon)
 
         switch(text) {
             case 'Attack 1': 
-                battleInfo.innerHTML = `${text} was used`
+                battleInfo.innerHTML = `${text} was used by ${pokemon}!`
                 // console.log(`${text} was used`);
                 break;
             case 'Attack 2':
-                battleInfo.innerHTML = `${text} was used`
+                battleInfo.innerHTML = `${text} was used by ${pokemon}!`
                 // console.log(`${text} was used`);
                 break;
             case 'Attack 3':
-                battleInfo.innerHTML = `${text} was used`
+                battleInfo.innerHTML = `${text} was used by ${pokemon}!`
+                console.log('pokemon: ', pokemon)
                 // console.log(`${text} was used`);
                 break;
             case 'Run': 
@@ -41,10 +45,22 @@ export default function Battle() {
                         <div id="battle-info" className='flex justify-center items-center mt-2 border-2 border-black rounded-lg' />
                     </div>
                     <div id='action-bar' className='grid gap-3 grid-cols-2 grid-rows-2 my-4 mx-auto border-2 border-black rounded-lg'>
-                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" onClick={handleClick}>Attack 1</button>
-                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" onClick={handleClick}>Attack 2</button>
-                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" onClick={handleClick}>Attack 3</button>
-                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonBlue/75 hover:bg-pokemonBlue cursor-pointer drop-shadow-xl hover:shadow-xl" onClick={handleClick}>Run</button>
+                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" 
+                            onClick={handleClick}>
+                            Attack 1
+                        </button>
+                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" 
+                            onClick={handleClick}>
+                            Attack 2
+                        </button>
+                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" 
+                            onClick={handleClick}>
+                            Attack 3
+                        </button>
+                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonBlue/75 hover:bg-pokemonBlue cursor-pointer drop-shadow-xl hover:shadow-xl" 
+                            onClick={handleClick}>
+                            Run
+                        </button>
                     </div>
                 </div>
             </div>
