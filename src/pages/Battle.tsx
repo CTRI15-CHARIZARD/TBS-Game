@@ -1,6 +1,10 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { PokemonContext } from '../store/pokemonContext'
+import bulbasaurBack from '../../image/bulbasaurBack.png'
+import bulbasaurFront from '../../image/bulbasaurFront.png'
+import charmanderBack from '../../image/charmanderBack.png'
+import charmanderFront from '../../image/charmanderFront.png'
 
 export default function Battle() {
     const { pokemon, setPokemon } = useContext(PokemonContext)
