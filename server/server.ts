@@ -9,16 +9,10 @@ const app = express();
 const httpServer = createServer(app); // Create HTTP server
 const io = new Server(httpServer, {
   cors: {
-    origin: 'http://localhost:8080', // Replace with the actual origin of your React application
+    origin: 'http://localhost:8080',
     methods: ['GET', 'POST'],
   },
 });
-
-// const io = require('socket.io')(3000, {
-//   cors: {
-//     origin: 'http://localhost:8080',
-//   },
-// });
 
 io.on('connection', (socket: Socket) => {
   console.log('A user connected');
@@ -26,7 +20,7 @@ io.on('connection', (socket: Socket) => {
   socket.on('roomId', () => {
     // console.log('in socket.on');
     // console.log(socket.id);
-    // Emit the roomId to the current connected client
+    // // Emit the roomId to the current connected client
     socket.emit('roomId', socket.id);
   });
 
