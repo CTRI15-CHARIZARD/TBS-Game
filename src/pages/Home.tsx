@@ -9,12 +9,14 @@ import pokemonHandDrawn from '../../images/handDrawnPokemon.png';
 
 const Home: React.FC = () => {
   const [isClicked, setIsClicked] = useState(false);
+  const [socketId, setSocketId] = useState('');
 
   useEffect(() => {
     const socket = io('http://localhost:3000'); // Replace with your server URL
 
     socket.on('connect', () => {
       console.log('Connected to WebSocket server');
+      setSocketId(socket.id); // Set the socket ID when connected
     });
 
     socket.on('disconnect', () => {
@@ -66,7 +68,7 @@ const Home: React.FC = () => {
                 <div className="absolute inset-0 rounded-lg border-2 border-pokemonPurple"></div>
               </div>
               <div className="mt-10 flex justify-center font-fuzzyBubbles text-2xl text-pokemonPurple">
-                So what are you waiting for?
+                So what are you waiting for? {socketId}
               </div>
               <div className="mt-6 flex justify-center ">
                 <NavLink
