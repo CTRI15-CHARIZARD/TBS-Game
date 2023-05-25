@@ -22,7 +22,9 @@ export default function Battle() {
     // const randomIndex = Math.floor(Math.random() * options.length);
     // const randomOption = options[randomIndex];
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-    const [opponent, setOpponent] = useState('Bulbasaur')
+    const [opponent, setOpponent] = useState(bulbasaurFront)
+    const [yourHealth, setYourHealth] = useState(98);
+    const [opponentHealth, setOpponentHealth] = useState(98);
 
       const handleButtonClick = () => {
       setIsButtonDisabled(true);
@@ -49,18 +51,138 @@ export default function Battle() {
         setIsClicked(true);
         setTimeout(() => {setIsClicked(false)}, 150);
 
+        const rockPaperScissors = ['Rock', 'Paper', 'Scissors'];
+        const randomIndex = Math.floor(Math.random() * rockPaperScissors.length);
+        const opponentAttack = rockPaperScissors[randomIndex];
+
         switch(text) {
-            case 'Attack 1': 
-                battleInfo.innerHTML = `${text} was used${ pokemon ? ' by ' + pokemon + '!' : '!'}`
+            case 'Rock': 
+                battleInfo.innerHTML = `${ pokemon ? pokemon : 'Jigglypuff'} used ${text}! Your opponent used ${opponentAttack}!`;
+                if (opponentAttack === 'Rock') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'You tied!'
+                    }, 2000))
+                } else if (opponentAttack === 'Paper') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'They hit you!'
+                    }, 2000))
+                    await Promise.resolve(setTimeout(() => {
+                        setYourHealth(yourHealth - 33)
+                    }, 4000))
+
+                    if (yourHealth <= 30) {
+                        await Promise.resolve(setTimeout(() => {
+                            battleInfo.innerHTML = 'Unfortunate! You lost!'
+                        }, 5000))
+                        setTimeout(() => {
+                            setPokemon('');
+                            navigate('/select')
+                            }, 7000);
+                    };
+                } else if (opponentAttack === 'Scissors') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'You hit them!'
+                    }, 2000))
+                    await Promise.resolve(setTimeout(() => {
+                        setOpponentHealth(opponentHealth - 33)
+                    }, 4000))
+
+                    if (opponentHealth <= 30) {
+                        await Promise.resolve(setTimeout(() => {
+                            battleInfo.innerHTML = 'Congratulations! You win!'
+                        }, 5000))
+                        setTimeout(() => {
+                            setPokemon('');
+                            navigate('/select')
+                            }, 7000);
+                    }
+                };
                 // console.log(`${text} was used`);
                 break;
-            case 'Attack 2':
-                battleInfo.innerHTML = `${text} was used${ pokemon ? ' by ' + pokemon + '!' : '!'}`
-                // console.log(`${text} was used`);
+            case 'Paper':
+                battleInfo.innerHTML = `${ pokemon ? pokemon : 'Jigglypuff'} used ${text}! Your opponent used ${opponentAttack}!`
+                if (opponentAttack === 'Paper') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'You tied!'
+                    }, 2000))
+                } else if (opponentAttack === 'Scissors') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'They hit you!'
+                    }, 2000))
+                    await Promise.resolve(setTimeout(() => {
+                        setYourHealth(yourHealth - 33)
+                    }, 4000))
+
+                    if (yourHealth <= 30) {
+                        await Promise.resolve(setTimeout(() => {
+                            battleInfo.innerHTML = 'Unfortunate! You lost!'
+                        }, 5000))
+                        setTimeout(() => {
+                            setPokemon('');
+                            navigate('/select')
+                            }, 7000);
+                    };
+                } else if (opponentAttack === 'Rock') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'You hit them!'
+                    }, 2000))
+                    await Promise.resolve(setTimeout(() => {
+                        setOpponentHealth(opponentHealth - 33)
+                    }, 4000))
+
+                    if (opponentHealth <= 30) {
+                        await Promise.resolve(setTimeout(() => {
+                            battleInfo.innerHTML = 'Congratulations! You win!'
+                        }, 5000))
+                        setTimeout(() => {
+                            setPokemon('');
+                            navigate('/select')
+                            }, 7000);
+                    }
+                };
                 break;
-            case 'Attack 3':
-                battleInfo.innerHTML = `${text} was used${ pokemon ? ' by ' + pokemon + '!' : '!'}`
-                console.log('pokemon: ', pokemon)
+            case 'Scissors':
+                battleInfo.innerHTML = `${ pokemon ? pokemon : 'Jigglypuff'} used ${text}! Your opponent used ${opponentAttack}!`
+                if (opponentAttack === 'Scissors') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'You tied!'
+                    }, 2000))
+                } else if (opponentAttack === 'Rock') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'They hit you!'
+                    }, 2000))
+                    await Promise.resolve(setTimeout(() => {
+                        setYourHealth(yourHealth - 33)
+                    }, 4000))
+
+                    if (yourHealth <= 30) {
+                        await Promise.resolve(setTimeout(() => {
+                            battleInfo.innerHTML = 'Unfortunate! You lost!'
+                        }, 5000))
+                        setTimeout(() => {
+                            setPokemon('');
+                            navigate('/select')
+                            }, 7000);
+                    };
+
+                } else if (opponentAttack === 'Paper') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'You hit them!'
+                    }, 2000))
+                    await Promise.resolve(setTimeout(() => {
+                        setOpponentHealth(opponentHealth - 33)
+                    }, 4000))
+
+                    if (opponentHealth <= 30) {
+                        await Promise.resolve(setTimeout(() => {
+                            battleInfo.innerHTML = 'Congratulations! You win!'
+                        }, 5000))
+                        setTimeout(() => {
+                            setPokemon('');
+                            navigate('/select')
+                            }, 7000);
+                    };
+                };
                 // console.log(`${text} was used`);
                 break;
             case 'Run': 
@@ -127,8 +249,8 @@ export default function Battle() {
                                 </div>
                                 <progress
                                     id="health-1"
-                                    value="100"
-                                    max="100"
+                                    value={yourHealth}
+                                    max="99"
                                     className="self-center mb-2"
                                     style={{ width: '200px', 
                                     height: '10px', 
@@ -142,12 +264,12 @@ export default function Battle() {
                             <div className="flex flex-col justify-end mb-6">
                                 <progress
                                     id="health-2"
-                                    value="100"
-                                    max="100"
+                                    value={opponentHealth}
+                                    max="99"
                                     className="self-center"
                                     style={{ width: '200px', height: '10px', backgroundColor: 'green' }}
                                 ></progress>
-                                <div className="flex items-center justify-center mt-24">
+                                <div className={`flex items-center justify-center mt-24 ${isClicked ? '-translate-x-3' : ''}`}>
                                     <img src={opponent} alt="Bulbasaur!"
                                     style={{ transform: 'scale(3)' }}/>
                                 </div>
@@ -161,7 +283,7 @@ export default function Battle() {
                                 handleButtonClick();
                             }}
                             disabled={isButtonDisabled}>
-                            Attack 1
+                            Rock
                         </button>
                         <button type='button' className={`action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 cursor-pointer drop-shadow-xl ${ !isButtonDisabled ? 'hover:bg-pokemonRed hover:shadow-xl' : ''}`} 
                             onClick={(event) => {
@@ -169,7 +291,7 @@ export default function Battle() {
                                 handleButtonClick();
                             }}
                             disabled={isButtonDisabled}>
-                            Attack 2
+                            Paper
                         </button>
                         <button type='button' className={`action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 cursor-pointer drop-shadow-xl ${ !isButtonDisabled ? 'hover:bg-pokemonRed hover:shadow-xl' : ''}`}
                             onClick={(event) => {
@@ -177,7 +299,7 @@ export default function Battle() {
                                 handleButtonClick();
                             }}
                             disabled={isButtonDisabled}>
-                            Attack 3
+                            Scissors
                         </button>
                         <button type='button' className={`action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonBlue/75 cursor-pointer drop-shadow-xl ${ !isButtonDisabled ? 'hover:bg-pokemonBlue hover:shadow-xl' : ''}`}
                             onClick={(event) => {
