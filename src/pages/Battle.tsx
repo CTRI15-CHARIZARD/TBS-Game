@@ -70,7 +70,7 @@ export default function Battle() {
                         setYourHealth(yourHealth - 33)
                     }, 4000))
 
-                    if (yourHealth <= 30) {
+                    if (yourHealth <= 35) {
                         await Promise.resolve(setTimeout(() => {
                             battleInfo.innerHTML = 'Unfortunate! You lost!'
                         }, 5000))
@@ -87,7 +87,7 @@ export default function Battle() {
                         setOpponentHealth(opponentHealth - 33)
                     }, 4000))
 
-                    if (opponentHealth <= 30) {
+                    if (opponentHealth <= 35) {
                         await Promise.resolve(setTimeout(() => {
                             battleInfo.innerHTML = 'Congratulations! You win!'
                         }, 5000))
@@ -113,7 +113,7 @@ export default function Battle() {
                         setYourHealth(yourHealth - 33)
                     }, 4000))
 
-                    if (yourHealth <= 30) {
+                    if (yourHealth <= 35) {
                         await Promise.resolve(setTimeout(() => {
                             battleInfo.innerHTML = 'Unfortunate! You lost!'
                         }, 5000))
@@ -130,7 +130,7 @@ export default function Battle() {
                         setOpponentHealth(opponentHealth - 33)
                     }, 4000))
 
-                    if (opponentHealth <= 30) {
+                    if (opponentHealth <= 35) {
                         await Promise.resolve(setTimeout(() => {
                             battleInfo.innerHTML = 'Congratulations! You win!'
                         }, 5000))
@@ -155,7 +155,7 @@ export default function Battle() {
                         setYourHealth(yourHealth - 33)
                     }, 4000))
 
-                    if (yourHealth <= 30) {
+                    if (yourHealth <= 35) {
                         await Promise.resolve(setTimeout(() => {
                             battleInfo.innerHTML = 'Unfortunate! You lost!'
                         }, 5000))
@@ -173,7 +173,7 @@ export default function Battle() {
                         setOpponentHealth(opponentHealth - 33)
                     }, 4000))
 
-                    if (opponentHealth <= 30) {
+                    if (opponentHealth <= 35) {
                         await Promise.resolve(setTimeout(() => {
                             battleInfo.innerHTML = 'Congratulations! You win!'
                         }, 5000))
