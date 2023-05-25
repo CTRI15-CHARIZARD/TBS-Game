@@ -1,5 +1,5 @@
 import { response } from 'express';
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { PokemonContext } from '../store/pokemonContext';
 import bulbasaurFront from '../../images/bulbasaurFront.png';
@@ -17,9 +17,28 @@ import charmanderBack from '../../images/charmanderBack.png';
 export default function Battle() {
     const { pokemon, setPokemon } = useContext(PokemonContext)
     const navigate = useNavigate()
-    const options = [bulbasaurFront, squirtleFront, pikachuFront, jigglypuffFront, charmanderFront];
-    const randomIndex = Math.floor(Math.random() * options.length);
-    const randomOption = options[randomIndex];
+    const [isClicked, setIsClicked] = useState(false);
+    // const options = [bulbasaurFront, squirtleFront, pikachuFront, jigglypuffFront, charmanderFront];
+    // const randomIndex = Math.floor(Math.random() * options.length);
+    // const randomOption = options[randomIndex];
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+    const [opponent, setOpponent] = useState('Bulbasaur')
+
+      const handleButtonClick = () => {
+      setIsButtonDisabled(true);
+      setTimeout(() => {
+        setIsButtonDisabled(false);
+      }, 4000);
+    };
+
+    useEffect(() => {
+        const options = [bulbasaurFront, squirtleFront, pikachuFront, jigglypuffFront, charmanderFront];
+        const randomIndex = Math.floor(Math.random() * options.length);
+        const randomOption = options[randomIndex];
+        setOpponent(randomOption);
+    }, [])
+
+    
 
     async function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
         let btn: EventTarget = e.target;
@@ -27,6 +46,8 @@ export default function Battle() {
 
         let battleInfo: HTMLElement = document.getElementById('battle-info')!
         console.log('pokemon: ', pokemon)
+        setIsClicked(true);
+        setTimeout(() => {setIsClicked(false)}, 150);
 
         switch(text) {
             case 'Attack 1': 
@@ -94,9 +115,9 @@ export default function Battle() {
                         Welcome Trainer!
                     </div> 
                     <div id='battle-screen' className='flex justify-evenly content-center border-4 border-black rounded-lg m-auto drop-shadow-xl'>
-                        <div className="flex flex-col items-end justify-end jusitfy-self-end h-full">
+                        <div className="flex flex-col items-end justify-end justify-self-end h-full">
                             <div className="flex flex-col justify-end mb-6">
-                                <div className="flex items-center justify-center mb-10">
+                                <div className={`flex items-center justify-center mb-10 ${isClicked ? 'translate-x-3' : ''}`}>
                                 <img src={pokemon === 'Charmander' ? charmanderBack :
                                     pokemon === 'Bulbasaur' ? bulbasaurBack :
                                     pokemon === 'Squirtle' ? squirtleBack :
@@ -127,27 +148,43 @@ export default function Battle() {
                                     style={{ width: '200px', height: '10px', backgroundColor: 'green' }}
                                 ></progress>
                                 <div className="flex items-center justify-center mt-24">
-                                    <img src={randomOption} alt="Bulbasaur!"
+                                    <img src={opponent} alt="Bulbasaur!"
                                     style={{ transform: 'scale(3)' }}/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div id='action-bar' className='grid gap-3 grid-cols-2 grid-rows-2 my-4 mx-auto border-2 border-black rounded-lg'>
-                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" 
-                            onClick={handleClick}>
+                        <button type='button' className={`action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 cursor-pointer drop-shadow-xl ${ !isButtonDisabled ? 'hover:bg-pokemonRed hover:shadow-xl' : ''}`} 
+                            onClick={(event) => {
+                                handleClick(event)
+                                handleButtonClick();
+                            }}
+                            disabled={isButtonDisabled}>
                             Attack 1
                         </button>
-                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" 
-                            onClick={handleClick}>
+                        <button type='button' className={`action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 cursor-pointer drop-shadow-xl ${ !isButtonDisabled ? 'hover:bg-pokemonRed hover:shadow-xl' : ''}`} 
+                            onClick={(event) => {
+                                handleClick(event)
+                                handleButtonClick();
+                            }}
+                            disabled={isButtonDisabled}>
                             Attack 2
                         </button>
-                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" 
-                            onClick={handleClick}>
+                        <button type='button' className={`action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 cursor-pointer drop-shadow-xl ${ !isButtonDisabled ? 'hover:bg-pokemonRed hover:shadow-xl' : ''}`}
+                            onClick={(event) => {
+                                handleClick(event)
+                                handleButtonClick();
+                            }}
+                            disabled={isButtonDisabled}>
                             Attack 3
                         </button>
-                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonBlue/75 hover:bg-pokemonBlue cursor-pointer drop-shadow-xl hover:shadow-xl" 
-                            onClick={handleClick}>
+                        <button type='button' className={`action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonBlue/75 cursor-pointer drop-shadow-xl ${ !isButtonDisabled ? 'hover:bg-pokemonBlue hover:shadow-xl' : ''}`}
+                            onClick={(event) => {
+                                handleClick(event)
+                                handleButtonClick();
+                            }}
+                            disabled={isButtonDisabled}>
                             Run
                         </button>
                     </div>
