@@ -1,31 +1,182 @@
-import { response } from 'express';
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { PokemonContext } from '../store/pokemonContext'
+import { PokemonContext } from '../store/pokemonContext';
+import bulbasaurFront from '../../images/bulbasaurFront.png';
+import bulbasaurBack from '../../images/bulbasaurBack.png';
+import squirtleFront from '../../images/squirtleFront.png';
+import squirtleBack from '../../images/squirtleBack.png';
+import pikachuFront from '../../images/pikachuFront.png';
+import pikachuBack from '../../images/pikachuBack.png';
+import jigglypuffFront from '../../images/jigglypuffFront.png';
+import jigglypuffBack from '../../images/jigglypuffBack.png';
+import charmanderFront from '../../images/charmanderFront.png';
+import charmanderBack from '../../images/charmanderBack.png';
 
 export default function Battle() {
     const { pokemon, setPokemon } = useContext(PokemonContext)
     const navigate = useNavigate()
+    const [isClicked, setIsClicked] = useState(false);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+    const [opponent, setOpponent] = useState(bulbasaurFront)
+    const [yourHealth, setYourHealth] = useState(98);
+    const [opponentHealth, setOpponentHealth] = useState(98);
 
+      const handleButtonClick = () => {
+      setIsButtonDisabled(true);
+      setTimeout(() => {
+        setIsButtonDisabled(false);
+      }, 4000);
+    };
+
+    useEffect(() => {
+        const options = [bulbasaurFront, squirtleFront, pikachuFront, jigglypuffFront, charmanderFront];
+        const randomIndex = Math.floor(Math.random() * options.length);
+        const randomOption = options[randomIndex];
+        setOpponent(randomOption);
+    }, [])
+
+    
     async function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
         let btn: EventTarget = e.target;
         let text: string = (btn as HTMLElement).textContent!
 
         let battleInfo: HTMLElement = document.getElementById('battle-info')!
         console.log('pokemon: ', pokemon)
+        setIsClicked(true);
+        setTimeout(() => {setIsClicked(false)}, 150);
+
+        const rockPaperScissors = ['Rock', 'Paper', 'Scissors'];
+        const randomIndex = Math.floor(Math.random() * rockPaperScissors.length);
+        const opponentAttack = rockPaperScissors[randomIndex];
 
         switch(text) {
-            case 'Attack 1': 
-                battleInfo.innerHTML = `${text} was used${ pokemon ? ' by ' + pokemon + '!' : '!'}`
+            case 'Rock': 
+                battleInfo.innerHTML = `${ pokemon ? pokemon : 'Jigglypuff'} used ${text}! Your opponent used ${opponentAttack}!`;
+                if (opponentAttack === 'Rock') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'You tied!'
+                    }, 2000))
+                } else if (opponentAttack === 'Paper') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'They hit you!'
+                    }, 2000))
+                    await Promise.resolve(setTimeout(() => {
+                        setYourHealth(yourHealth - 33)
+                    }, 4000))
+
+                    if (yourHealth <= 35) {
+                        await Promise.resolve(setTimeout(() => {
+                            battleInfo.innerHTML = 'Unfortunate! You lost!'
+                        }, 5000))
+                        setTimeout(() => {
+                            setPokemon('');
+                            navigate('/select')
+                            }, 7000);
+                    };
+                } else if (opponentAttack === 'Scissors') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'You hit them!'
+                    }, 2000))
+                    await Promise.resolve(setTimeout(() => {
+                        setOpponentHealth(opponentHealth - 33)
+                    }, 4000))
+
+                    if (opponentHealth <= 35) {
+                        await Promise.resolve(setTimeout(() => {
+                            battleInfo.innerHTML = 'Congratulations! You win!'
+                        }, 5000))
+                        setTimeout(() => {
+                            setPokemon('');
+                            navigate('/select')
+                            }, 7000);
+                    }
+                };
                 // console.log(`${text} was used`);
                 break;
-            case 'Attack 2':
-                battleInfo.innerHTML = `${text} was used${ pokemon ? ' by ' + pokemon + '!' : '!'}`
-                // console.log(`${text} was used`);
+            case 'Paper':
+                battleInfo.innerHTML = `${ pokemon ? pokemon : 'Jigglypuff'} used ${text}! Your opponent used ${opponentAttack}!`
+                if (opponentAttack === 'Paper') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'You tied!'
+                    }, 2000))
+                } else if (opponentAttack === 'Scissors') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'They hit you!'
+                    }, 2000))
+                    await Promise.resolve(setTimeout(() => {
+                        setYourHealth(yourHealth - 33)
+                    }, 4000))
+
+                    if (yourHealth <= 35) {
+                        await Promise.resolve(setTimeout(() => {
+                            battleInfo.innerHTML = 'Unfortunate! You lost!'
+                        }, 5000))
+                        setTimeout(() => {
+                            setPokemon('');
+                            navigate('/select')
+                            }, 7000);
+                    };
+                } else if (opponentAttack === 'Rock') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'You hit them!'
+                    }, 2000))
+                    await Promise.resolve(setTimeout(() => {
+                        setOpponentHealth(opponentHealth - 33)
+                    }, 4000))
+
+                    if (opponentHealth <= 35) {
+                        await Promise.resolve(setTimeout(() => {
+                            battleInfo.innerHTML = 'Congratulations! You win!'
+                        }, 5000))
+                        setTimeout(() => {
+                            setPokemon('');
+                            navigate('/select')
+                            }, 7000);
+                    }
+                };
                 break;
-            case 'Attack 3':
-                battleInfo.innerHTML = `${text} was used${ pokemon ? ' by ' + pokemon + '!' : '!'}`
-                console.log('pokemon: ', pokemon)
+            case 'Scissors':
+                battleInfo.innerHTML = `${ pokemon ? pokemon : 'Jigglypuff'} used ${text}! Your opponent used ${opponentAttack}!`
+                if (opponentAttack === 'Scissors') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'You tied!'
+                    }, 2000))
+                } else if (opponentAttack === 'Rock') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'They hit you!'
+                    }, 2000))
+                    await Promise.resolve(setTimeout(() => {
+                        setYourHealth(yourHealth - 33)
+                    }, 4000))
+
+                    if (yourHealth <= 35) {
+                        await Promise.resolve(setTimeout(() => {
+                            battleInfo.innerHTML = 'Unfortunate! You lost!'
+                        }, 5000))
+                        setTimeout(() => {
+                            setPokemon('');
+                            navigate('/select')
+                            }, 7000);
+                    };
+
+                } else if (opponentAttack === 'Paper') {
+                    await Promise.resolve(setTimeout(() => {
+                        battleInfo.innerHTML = 'You hit them!'
+                    }, 2000))
+                    await Promise.resolve(setTimeout(() => {
+                        setOpponentHealth(opponentHealth - 33)
+                    }, 4000))
+
+                    if (opponentHealth <= 35) {
+                        await Promise.resolve(setTimeout(() => {
+                            battleInfo.innerHTML = 'Congratulations! You win!'
+                        }, 5000))
+                        setTimeout(() => {
+                            setPokemon('');
+                            navigate('/select')
+                            }, 7000);
+                    };
+                };
                 // console.log(`${text} was used`);
                 break;
             case 'Run': 
@@ -45,8 +196,8 @@ export default function Battle() {
                     await Promise.resolve(setTimeout(() => {
                         battleInfo.innerHTML = '';
                     }, 4000))
-                    setPokemon('');
                     setTimeout(() => {
+                        setPokemon('');
                             navigate('/select')
                         }, 4000);
                 }
@@ -67,7 +218,6 @@ export default function Battle() {
         const health1: HTMLElement = document.getElementById('health-1')!;
         const totalHealth: number = 100//(health1 as HTMLProgressElement).max
         const maxHealth1 = 100//(health1 as HTMLProgressElement).max
-
         const health2: HTMLElement = document.getElementById('health-2')!;
     //     (health2 as HTMLProgressElement).value -= 10
     // }
@@ -80,15 +230,20 @@ export default function Battle() {
                         Welcome Trainer!
                     </div> 
                     <div id='battle-screen' className='flex justify-evenly content-center border-4 border-black rounded-lg m-auto drop-shadow-xl'>
-                        <div className="flex flex-col items-end justify-end jusitfy-self-end h-full">
+                        <div className="flex flex-col items-end justify-end justify-self-end h-full">
                             <div className="flex flex-col justify-end mb-6">
-                                <div className="flex items-center justify-center mb-8">
-                                    This is Pokemon image 1
+                                <div className={`flex items-center justify-center mb-10 ${isClicked ? 'translate-x-3' : ''}`}>
+                                <img src={pokemon === 'Charmander' ? charmanderBack :
+                                    pokemon === 'Bulbasaur' ? bulbasaurBack :
+                                    pokemon === 'Squirtle' ? squirtleBack :
+                                    pokemon === 'Pikachu' ? pikachuBack : jigglypuffBack
+                            } alt="Charmander!" 
+                                style={{ transform: 'scale(3)' }}/>
                                 </div>
                                 <progress
                                     id="health-1"
-                                    value="100"
-                                    max="100"
+                                    value={yourHealth}
+                                    max="99"
                                     className="self-center mb-2"
                                     style={{ width: '200px', 
                                     height: '10px', 
@@ -102,32 +257,49 @@ export default function Battle() {
                             <div className="flex flex-col justify-end mb-6">
                                 <progress
                                     id="health-2"
-                                    value="100"
-                                    max="100"
-                                    className="self-center mb-2"
+                                    value={opponentHealth}
+                                    max="99"
+                                    className="self-center"
                                     style={{ width: '200px', height: '10px', backgroundColor: 'green' }}
                                 ></progress>
-                                <div className="flex items-center justify-center mt-24">
-                                    This is Pokemon image 2
+                                <div className={`flex items-center justify-center mt-24 ${isClicked ? '-translate-x-3' : ''}`}>
+                                    <img src={opponent} alt="Bulbasaur!"
+                                    style={{ transform: 'scale(3)' }}/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div id='action-bar' className='grid gap-3 grid-cols-2 grid-rows-2 my-4 mx-auto border-2 border-black rounded-lg'>
-                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" 
-                            onClick={handleClick}>
-                            Attack 1
+                        <button type='button' className={`action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 cursor-pointer drop-shadow-xl ${ !isButtonDisabled ? 'hover:bg-pokemonRed hover:shadow-xl' : ''}`} 
+                            onClick={(event) => {
+                                handleClick(event)
+                                handleButtonClick();
+                            }}
+                            disabled={isButtonDisabled}>
+                            Rock
                         </button>
-                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" 
-                            onClick={handleClick}>
-                            Attack 2
+                        <button type='button' className={`action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 cursor-pointer drop-shadow-xl ${ !isButtonDisabled ? 'hover:bg-pokemonRed hover:shadow-xl' : ''}`} 
+                            onClick={(event) => {
+                                handleClick(event)
+                                handleButtonClick();
+                            }}
+                            disabled={isButtonDisabled}>
+                            Paper
                         </button>
-                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 hover:bg-pokemonRed cursor-pointer drop-shadow-xl hover:shadow-xl" 
-                            onClick={handleClick}>
-                            Attack 3
+                        <button type='button' className={`action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonRed/75 cursor-pointer drop-shadow-xl ${ !isButtonDisabled ? 'hover:bg-pokemonRed hover:shadow-xl' : ''}`}
+                            onClick={(event) => {
+                                handleClick(event)
+                                handleButtonClick();
+                            }}
+                            disabled={isButtonDisabled}>
+                            Scissors
                         </button>
-                        <button type='button' className="action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonBlue/75 hover:bg-pokemonBlue cursor-pointer drop-shadow-xl hover:shadow-xl" 
-                            onClick={handleClick}>
+                        <button type='button' className={`action-btn border-2 border-black m-auto py-2 px-8 rounded-lg bg-pokemonBlue/75 cursor-pointer drop-shadow-xl ${ !isButtonDisabled ? 'hover:bg-pokemonBlue hover:shadow-xl' : ''}`}
+                            onClick={(event) => {
+                                handleClick(event)
+                                handleButtonClick();
+                            }}
+                            disabled={isButtonDisabled}>
                             Run
                         </button>
                     </div>

@@ -1,12 +1,11 @@
 import "./styles/style.css";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import TopBanner from "./pages/TopBanner";
 import Home from "./pages/Home";
 import Battle from "./pages/Battle";
 import PokemonSelector from "./pages/PokemonSelector";
 import { PokemonContext } from "./store/pokemonContext";
-
 
 const router = createBrowserRouter(
   createRoutesFromElements(

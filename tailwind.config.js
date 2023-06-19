@@ -30,8 +30,13 @@ module.exports = {
     extend: {
       fontFamily: {
         'fuzzyBubbles': ['Fuzzy Bubbles', 'sans-serif']
-      }
+      },
+      scale: {
+        '200': '2',
+        '250': '2.5',
+        '300': '3'
     }
   },
   plugins: [],
-};
+}
+}

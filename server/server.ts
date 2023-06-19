@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../dist')));
 
-app.get('/api/pokemon', pokeRouter);
-app.get('/api/move', moveRouter);
+// app.get('/api/pokemon', pokeRouter);
+// app.get('/api/move', moveRouter);
 
 app.use((req: Request, res: Response): void => {res.sendStatus(404)});
 
