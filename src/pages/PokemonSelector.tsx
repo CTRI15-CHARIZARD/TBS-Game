@@ -22,13 +22,13 @@ const SelectPokemon: React.FC = () => {
 
     return (
         <>
-            <div className="min-h-screen bg-gradient-to-b from-pokemonBlueDarker via-pokemonBlueLighter to-pokemonBlueLighter">
+            <div className="min-h-screen w-screen bg-gradient-to-b from-pokemonBlueDarker via-pokemonBlueLighter to-pokemonBlueLighter">
                 <br></br>
                 <br></br>
                 <div className="flex justify-center mt-10 text-4xl text-white font-fuzzyBubbles mt-24">
                     Select your Pokemon!
                 </div>
-                <div id="pokemonChoices" className='flex flex-row justify-around items-center pt-24 pb-24'>
+                <div id="pokemonChoices" className='flex flex-wrap justify-around items-center pt-24 pb-24'>
                     <div className="flex flex-col justify-center">
                         <div>
                             <img src={Bulbasaur} alt="Bulbasaur picture" className="max-w-xs rounded-full" />

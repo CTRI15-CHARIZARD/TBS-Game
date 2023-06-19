@@ -20,14 +20,14 @@ const Home: React.FC = () => {
                 <img src={welcomePokemon} alt="Welcome to the Wonderful World of Pokémon!" className="mt-8"/>
                 <div className="flex flex-nowrap justify-evenly mt-10">
                     <div className="w-full pr-20">
-                        <div className="flex justify-center mb-4 text-3xl text-pokemonYellow font-fuzzyBubbles">Choose from your favorites...</div>
+                        <div className="flex justify-center mb-4 text-3xl text-pokemonYellow font-fuzzyBubbles">Choose from your favorites!</div>
                             <div className="max-w-md shadow-lg rounded-lg overflow-hidden relative">
                             <img src={pokemonList} alt="Chart of Pokémon" className="w-full h-auto" />
                         <div className="absolute inset-0 border-2 border-pokemonPurple rounded-lg"></div>
                         </div>
                     </div>
                     <div className="w-full pr-20">
-                        <div className="flex justify-center mb-4 text-3xl text-pokemonYellow font-fuzzyBubbles">...and battle your friends!</div>
+                        <div className="flex justify-center mb-4 text-3xl text-pokemonYellow font-fuzzyBubbles">Battle your friends!</div>
                             <div className="max-w-md shadow-lg rounded-lg overflow-hidden relative">
                             <img src={pokemonBattle} alt="Pokémon Battle" className="w-full h-auto" />
                         <div className="absolute inset-0 border-2 border-pokemonPurple rounded-lg"></div>
