@@ -1,4 +1,3 @@
-import { response } from 'express';
 import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { PokemonContext } from '../store/pokemonContext';
@@ -13,14 +12,10 @@ import jigglypuffBack from '../../images/jigglypuffBack.png';
 import charmanderFront from '../../images/charmanderFront.png';
 import charmanderBack from '../../images/charmanderBack.png';
 
-
 export default function Battle() {
     const { pokemon, setPokemon } = useContext(PokemonContext)
     const navigate = useNavigate()
     const [isClicked, setIsClicked] = useState(false);
-    // const options = [bulbasaurFront, squirtleFront, pikachuFront, jigglypuffFront, charmanderFront];
-    // const randomIndex = Math.floor(Math.random() * options.length);
-    // const randomOption = options[randomIndex];
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [opponent, setOpponent] = useState(bulbasaurFront)
     const [yourHealth, setYourHealth] = useState(98);
@@ -41,7 +36,6 @@ export default function Battle() {
     }, [])
 
     
-
     async function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
         let btn: EventTarget = e.target;
         let text: string = (btn as HTMLElement).textContent!
@@ -224,7 +218,6 @@ export default function Battle() {
         const health1: HTMLElement = document.getElementById('health-1')!;
         const totalHealth: number = 100//(health1 as HTMLProgressElement).max
         const maxHealth1 = 100//(health1 as HTMLProgressElement).max
-
         const health2: HTMLElement = document.getElementById('health-2')!;
     //     (health2 as HTMLProgressElement).value -= 10
     // }

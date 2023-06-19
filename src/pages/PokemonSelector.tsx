@@ -7,9 +7,6 @@ import Squirtle from '../../images/squirtle.png';
 import Pikachu from '../../images/pikachu.png';
 import Jigglypuff from '../../images/jigglypuff.png';
 
-
-
-
 const SelectPokemon: React.FC = () => {
     const { pokemon, setPokemon } = useContext(PokemonContext)
     const navigate = useNavigate()
@@ -22,7 +19,7 @@ const SelectPokemon: React.FC = () => {
 
     return (
         <>
-            <div className="min-h-screen w-screen bg-gradient-to-b from-pokemonBlueDarker via-pokemonBlueLighter to-pokemonBlueLighter">
+            <div className="bg-gradient-to-b from-pokemonBlueDarker via-pokemonBlueLighter to-pokemonBlueLighter">
                 <br></br>
                 <br></br>
                 <div className="flex justify-center mt-10 text-4xl text-white font-fuzzyBubbles mt-24">
